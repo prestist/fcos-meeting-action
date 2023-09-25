@@ -1,0 +1,21 @@
+name: 'FCOS Meeting issue'
+description: 'Create a issue for FCOS Meeting checklist'
+author: 'prestist'
+
+inputs:
+  issueTitle:
+    description: 'issue title to be created for meeting checklist'
+    required: true
+    default: 'FCOS Meeting Checklist'
+  rootURLMeetingLogs:
+    description: 'Root URL past meeting logs'
+    required: true
+    default: 'https://meetbot-raw.fedoraproject.org/teams/fedora_coreos_meeting/'
+  trackingRepo:
+    description: 'Where the meeting topic issues are found'
+    required: true
+    default: 'coreos/fedora-coreos-tracker'
+
+runs:
+  using: node20
+  main: dist/index.js
