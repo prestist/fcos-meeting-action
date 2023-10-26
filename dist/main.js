@@ -46,7 +46,7 @@ async function run() {
         console.log(meetingTopics);
         const issueBody = hydrateIssueTemplate(actionItems, meetingTopics);
         console.log('Create issue');
-        (0, createIssue_1.createThisReposIssue)('Fedora CoreOS Weekly Meeting', issueBody);
+        (0, createIssue_1.createThisReposIssue)(issueBody);
     }
     catch (error) {
         // Fail the workflow run if an error occurs

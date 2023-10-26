@@ -22901,12 +22901,14 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.createThisReposIssue = void 0;
 const core = __importStar(__nccwpck_require__(2186));
 const octokit_1 = __nccwpck_require__(7467);
-async function createThisReposIssue(title, body) {
+async function createThisReposIssue(body) {
     try {
         const octokit = new octokit_1.Octokit({
             auth: process.env.GITHUB_TOKEN
         });
-        const title = core.getInput('issueTitle');
+        // calculate todays date in YYYY-MM-DD format
+        const today = new Date().toISOString().split('T')[0];
+        var title = core.getInput('issueTitle') + ' ' + today;
         const githubRepository = process.env.GITHUB_REPOSITORY;
         if (!githubRepository) {
             throw new Error(`GITHUB_REPOSITORY environment variable is not set`);
@@ -22983,7 +22985,7 @@ async function run() {
         console.log(meetingTopics);
         const issueBody = hydrateIssueTemplate(actionItems, meetingTopics);
         console.log('Create issue');
-        (0, createIssue_1.createThisReposIssue)('Fedora CoreOS Weekly Meeting', issueBody);
+        (0, createIssue_1.createThisReposIssue)(issueBody);
     }
     catch (error) {
         // Fail the workflow run if an error occurs

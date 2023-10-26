@@ -20,7 +20,7 @@ export async function run(): Promise<void> {
 
     const issueBody = hydrateIssueTemplate(actionItems, meetingTopics)
     console.log('Create issue')
-    createThisReposIssue('Fedora CoreOS Weekly Meeting', issueBody)
+    createThisReposIssue(issueBody)
   } catch (error) {
     // Fail the workflow run if an error occurs
     if (error instanceof Error) core.setFailed(error.message)

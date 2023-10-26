@@ -26,11 +26,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.createThisReposIssue = void 0;
 const core = __importStar(require("@actions/core"));
 const octokit_1 = require("octokit");
-async function createThisReposIssue(title, body) {
+async function createThisReposIssue(body) {
     try {
         const octokit = new octokit_1.Octokit({
             auth: process.env.GITHUB_TOKEN
         });
+        // calculate todays date in YYYY-MM-DD format
+        const today = new Date().toISOString().split('T')[0];
+        var title = core.getInput('issueTitle') + ' ' + today;
         const githubRepository = process.env.GITHUB_REPOSITORY;
         if (!githubRepository) {
             throw new Error(`GITHUB_REPOSITORY environment variable is not set`);
