@@ -13,3 +13,18 @@ Steps to run the meeting
     Navigate to this week's meeting and follow the steps presented. 
    
 Working days: non-holiday weekdays. Relevant holidays are the national holidays of the USA, Western Europe, and India.
+
+
+# Development
+
+## Prerequisites
+- install node package manger (npm)
+- use npm to install typescript `npm install typescript --save-dev`
+
+## Dev Workflow 
+- Work against the `.ts` files to add your changes
+- Compile them using `npm run bundle` which produces `.js` files
+- Commit the `.ts` and `.js` files
+
+### Note
+The action uses the `.js` files to run the action, and are found in the `dist directory. The `.ts` files are used for development purposes only.
