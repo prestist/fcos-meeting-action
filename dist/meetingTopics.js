@@ -31,9 +31,10 @@ async function GetMeetingTopics() {
         const octokit = new rest_1.Octokit({
             auth: process.env.GITHUB_TOKEN
         });
+        const [owner, repo] = core.getInput('trackingRepo').split(`/`);
         const issues = await octokit.issues.listForRepo({
-            owner: `coreos`,
-            repo: `fedora-coreos-tracker`,
+            owner,
+            repo,
             labels: `meeting`,
             state: `open`
         });
