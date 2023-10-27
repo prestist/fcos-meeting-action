@@ -8,7 +8,7 @@ export async function createThisReposIssue(body: string): Promise<void> {
     })
     // calculate todays date in YYYY-MM-DD format
     const today = new Date().toISOString().split('T')[0]
-    var title = core.getInput('issueTitle') + ' ' + today
+    const title = `${core.getInput('issueTitle')} ${today}`
     const githubRepository = process.env.GITHUB_REPOSITORY
     if (!githubRepository) {
       throw new Error(`GITHUB_REPOSITORY environment variable is not set`)
@@ -22,7 +22,6 @@ export async function createThisReposIssue(body: string): Promise<void> {
       body
     })
   } catch (error) {
-    console.log(error)
     // Fail the workflow run if an error occurs
     if (error instanceof Error) core.setFailed(error.message)
   }

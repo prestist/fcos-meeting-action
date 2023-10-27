@@ -18,9 +18,9 @@ export async function GetMeetingTopics(): Promise<string> {
     }
 
     let issuesToBeDiscussed = ``
-    for (let i = 0; i < issues.data.length; i++) {
-      issuesToBeDiscussed += `    - [ ] \`#topic ${issues.data[i].title}\`  \n`
-      issuesToBeDiscussed += `        - \`#link ${issues.data[i].html_url}\`  \n`
+    for (const i of issues.data) {
+      issuesToBeDiscussed += `    - [ ] \`#topic ${i.title}\`  \n`
+      issuesToBeDiscussed += `        - \`#link ${i.html_url}\`  \n`
     }
     return issuesToBeDiscussed
   } catch (error) {

@@ -1,7 +1,8 @@
 # FCOS-Meeting
 
 ## Meeting Notes
-The meeting is held every week, meetings are at `16:30 UTC` on Wednesdays. The meeting is held in #fedora-meeting-1 on libera.chat. The meeting is logged and the logs are available at https://meetbot.fedoraproject.org/teams/fedora_coreos_meeting/
+
+The meeting is held every week, meetings are at `16:30 UTC` on Wednesdays. The meeting is held in #fedora-meeting-1 on libera.chat. The meeting is logged and the logs are available [here](https://meetbot.fedoraproject.org/teams/fedora_coreos_meeting/)
 
 ### Required Concepts
 
@@ -41,7 +42,7 @@ pass by a simple majority of those voting.
 
 ## For Urgent Ad-Hoc Votes
 
-- All ad-hoc votes will be held via tracker issues in the fedora-coreos-tracker repo.
+- All ad-hoc votes will be held via tracker issues in the fedora-coreos-tracker repository.
 - Ad-hoc votes must be announced on the current primary mailing list for Fedora CoreOS.
 - Ad-Hoc votes must be open for at least three hours after the announcement.
 
@@ -50,6 +51,7 @@ At least 5 people must vote, or 51% of the WG membership, whichever is less. Vot
 
 
 ## Meeting Steps
+
 1. Join channel #fedora-meeting-1 on libera.chat copy these commands and paste them in the channel
     
     - [ ] `#startmeeting fedora_coreos_meeting`
@@ -58,7 +60,8 @@ At least 5 people must vote, or 51% of the WG membership, whichever is less. Vot
 2. Switch to channel #fedora-coreos on libera.chat
     
     - [ ] Copy the following notification and post it
-        ``` 
+
+        ```text
         aaradhak anthr76 apiaseck davdunc dustymabe gursewak jaimelm jbrooks jcajka jdoss jlebon jmarrero lorbus miabbott nasirhm quentin9696[m] ravanelli saqali walters 
         FCOS community meeting in #fedora-meeting-1
         If you don't want to be pinged remove your name from this file: https://github.com/coreos/fedora-coreos-tracker/blob/main/issue_template/meeting-template.md
@@ -75,7 +78,7 @@ At least 5 people must vote, or 51% of the WG membership, whichever is less. Vot
 
 5. After the Action items are covered start the topics from the tracker
     
-    - [ ] Cover the below topics from the tracker repo
+    - [ ] Cover the below topics from the tracker repository
 {{meeting-topics}}
 
 6. Once all the topics are covered start the open floor
@@ -95,15 +98,15 @@ At least 5 people must vote, or 51% of the WG membership, whichever is less. Vot
 
 2. Email a meeting summary
    
-   - [ ] to: coreos@lists.fedoraproject.org
+   - [ ] to: `coreos@lists.fedoraproject.org`
    - [ ] subject: Fedora CoreOS Community Meeting Minutes YYYY-MM-DD
-   - [ ] cc: devel@lists.fedoraproject.org
+   - [ ] cc: `devel@lists.fedoraproject.org`
    - [ ] The body of the email is two parts
         - [ ] Header
 
             1. Copy and paste the following
 
-                ```
+                ```text
                 Minutes: <this-meetings-notes>.html
                 Minutes (text): <this-meetings-notes>.txt
                 Log: <this-meetings-notes>.log.html
@@ -119,7 +122,8 @@ At least 5 people must vote, or 51% of the WG membership, whichever is less. Vot
     - [ ] category: `Project Discussion`
     - [ ] tags: `coreos-wg`
     - [ ] In the terminal Copy and paste the following
-        ```
+
+        ```bash
         fcosmeetinghtml() {
             local url=$1
             # we'll substitute in using the non-raw url for nice highlighting of line numbers
@@ -138,3 +142,4 @@ At least 5 people must vote, or 51% of the WG membership, whichever is less. Vot
 
     - [ ] In the terminal run `fcosmeetinghtml <this-meetings-notes>.html`
     - [ ] Copy and paste the output into the post body
+    

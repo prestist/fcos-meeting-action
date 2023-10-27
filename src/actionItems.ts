@@ -14,18 +14,18 @@ export async function GetActionItems(): Promise<string> {
     const meetingNotesURL = core.getInput('rootURLMeetingLogs')
     let lastMeetingNotesUrl = `fedora_coreos_meeting.`
     const listOfMeetings = await fetchData(meetingNotesURL)
-    let matches = listOfMeetings.match(meetingListRegEx)
+    const matches = listOfMeetings.match(meetingListRegEx)
 
     if (matches != null) {
       const lastMeeting = matches[matches.length - 1]
       // This should be the latest meeting`s date in with the format of YYYY-MM-DD-HH.MM.txt
       lastMeetingNotesUrl = meetingNotesURL + lastMeetingNotesUrl + lastMeeting
-      console.debug('last meeting notes url' + lastMeetingNotesUrl)
+      console.debug(`last meeting notes url${lastMeetingNotesUrl}`)
       const lastMeetingNotes = await fetchData(lastMeetingNotesUrl)
       const actionItemMatches = actionItemsRegEx.exec(lastMeetingNotes)
 
       if (actionItemMatches) {
-        console.debug('action item matches' + actionItemMatches[0])
+        console.debug(`action item matches${actionItemMatches[0]}`)
         // if the match is just new lines, then there were no action items
         if (actionItemMatches[0].match(/^\s*$/)) {
           return `#topic there are no action items from the last meeting.`

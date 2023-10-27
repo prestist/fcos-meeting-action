@@ -22832,16 +22832,16 @@ async function GetActionItems() {
         const meetingNotesURL = core.getInput('rootURLMeetingLogs');
         let lastMeetingNotesUrl = `fedora_coreos_meeting.`;
         const listOfMeetings = await fetchData(meetingNotesURL);
-        let matches = listOfMeetings.match(meetingListRegEx);
+        const matches = listOfMeetings.match(meetingListRegEx);
         if (matches != null) {
             const lastMeeting = matches[matches.length - 1];
             // This should be the latest meeting`s date in with the format of YYYY-MM-DD-HH.MM.txt
             lastMeetingNotesUrl = meetingNotesURL + lastMeetingNotesUrl + lastMeeting;
-            console.debug('last meeting notes url' + lastMeetingNotesUrl);
+            console.debug(`last meeting notes url${lastMeetingNotesUrl}`);
             const lastMeetingNotes = await fetchData(lastMeetingNotesUrl);
             const actionItemMatches = actionItemsRegEx.exec(lastMeetingNotes);
             if (actionItemMatches) {
-                console.debug('action item matches' + actionItemMatches[0]);
+                console.debug(`action item matches${actionItemMatches[0]}`);
                 // if the match is just new lines, then there were no action items
                 if (actionItemMatches[0].match(/^\s*$/)) {
                     return `#topic there are no action items from the last meeting.`;
@@ -22908,7 +22908,7 @@ async function createThisReposIssue(body) {
         });
         // calculate todays date in YYYY-MM-DD format
         const today = new Date().toISOString().split('T')[0];
-        var title = core.getInput('issueTitle') + ' ' + today;
+        const title = `${core.getInput('issueTitle')} ${today}`;
         const githubRepository = process.env.GITHUB_REPOSITORY;
         if (!githubRepository) {
             throw new Error(`GITHUB_REPOSITORY environment variable is not set`);
@@ -22922,7 +22922,6 @@ async function createThisReposIssue(body) {
         });
     }
     catch (error) {
-        console.log(error);
         // Fail the workflow run if an error occurs
         if (error instanceof Error)
             core.setFailed(error.message);
@@ -23054,9 +23053,9 @@ async function GetMeetingTopics() {
             return `#topic No meeting topics found.`;
         }
         let issuesToBeDiscussed = ``;
-        for (let i = 0; i < issues.data.length; i++) {
-            issuesToBeDiscussed += `    - [ ] \`#topic ${issues.data[i].title}\`  \n`;
-            issuesToBeDiscussed += `        - \`#link ${issues.data[i].html_url}\`  \n`;
+        for (const i of issues.data) {
+            issuesToBeDiscussed += `    - [ ] \`#topic ${i.title}\`  \n`;
+            issuesToBeDiscussed += `        - \`#link ${i.html_url}\`  \n`;
         }
         return issuesToBeDiscussed;
     }
