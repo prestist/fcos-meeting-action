@@ -2,7 +2,7 @@
 
 ## Meeting Notes
 
-The meeting is held every week, meetings are at `16:30 UTC` on Wednesdays. The meeting is held in #fedora-meeting-1 on libera.chat. The meeting is logged and the logs are available [here](https://meetbot.fedoraproject.org/teams/fedora_coreos_meeting/)
+The meeting is held every week, meetings are at `16:30 UTC` on Wednesdays. The meeting is held in https://matrix.to/#/#meeting-1:fedoraproject.org on matrix. The meeting is logged and the logs are available [here](https://meetbot.fedoraproject.org/teams/fedora_coreos_meeting/)
 
 ### Required Concepts
 
@@ -18,10 +18,10 @@ Please see [meeting-people.txt](https://github.com/coreos/fedora-coreos-tracker/
 
 <details>
 <summary>Meeting host Requirements</summary>
-The meeting host needs to have IRC configured and setup on their machine.
-The host needs to have access to the following channels on libera.chat
-    - `#fedora-meeting-1`
-    - `#fedora-coreos`
+The meeting host needs to have a matrix account (an example is an account on the [fedora matrix server](https://chat.fedoraproject.org/#/room/#coreos:fedoraproject.org).)
+The host needs to have access to the following channels on matrix
+    - [#coreos:fedoraproject.org](https://matrix.to/#/#coreos:fedoraproject.org)
+    - [#meeting-1:fedoraproject.org](https://matrix.to/#/#meeting-1:fedoraproject.org)
 The host needs to have a fedora account and be able to post discussion topics to the [fedora project](https://discussion.fedoraproject.org/tag/coreos-wg)
 </details>
 ## For Regularly Scheduled Meetings
@@ -52,12 +52,12 @@ At least 5 people must vote, or 51% of the WG membership, whichever is less. Vot
 
 ## Meeting Steps
 
-1. Join channel #fedora-meeting-1 on libera.chat copy these commands and paste them in the channel
+1. Join channel [#coreos:fedoraproject.org](https://matrix.to/#/#coreos:fedoraproject.org) on matrix, copy these commands and paste them in the channel
     
-    - [ ] `#startmeeting fedora_coreos_meeting`
-    - [ ] `#topic roll call`
+    - [ ] `!startmeeting fedora_coreos_meeting`
+    - [ ] `!topic roll call`
 
-2. Switch to channel #fedora-coreos on libera.chat
+2. Switch to channel [#meeting-1:fedoraproject.org](https://matrix.to/#/#meeting-1:fedoraproject.org) on matrix
     
     - [ ] Copy the following notification and post it
 
@@ -67,13 +67,11 @@ At least 5 people must vote, or 51% of the WG membership, whichever is less. Vot
         If you don't want to be pinged remove your name from this file: https://github.com/coreos/fedora-coreos-tracker/blob/main/issue_template/meeting-template.md
         ```
 
-3. Switch back to #fedora-meeting-1 wait for people to join and add each of them as a chair
-
-    - [ ] `#chair <name>`
+3. Switch back to [#meeting-1:fedoraproject.org](https://matrix.to/#/#meeting-1:fedoraproject.org) wait for people to join
 
 4. After 2-4 mins pass start the Action items from last meeting
 
-    - [ ] `#topic Action items from last meeting`
+    - [ ] `!topic Action items from last meeting`
     - [ ] `{{action-items}}`
 
 5. After the Action items are covered start the topics from the tracker
@@ -83,11 +81,11 @@ At least 5 people must vote, or 51% of the WG membership, whichever is less. Vot
 
 6. Once all the topics are covered start the open floor
 
-    - [ ] `#topic Open Floor`
+    - [ ] `!topic Open Floor`
 
 7. Once the time limit is reached or the open floor is quiet end the meeting
 
-    - [ ] `#endmeeting`
+    - [ ] `!endmeeting`
 
 ## Housekeeping
 

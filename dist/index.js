@@ -22844,7 +22844,7 @@ async function GetActionItems() {
                 console.debug(`action item matches${actionItemMatches[0]}`);
                 // if the match is just new lines, then there were no action items
                 if (actionItemMatches[0].match(/^\s*$/)) {
-                    return `#topic there are no action items from the last meeting.`;
+                    return `!topic there are no action items from the last meeting.`;
                 }
                 return actionItemMatches[0];
             }
@@ -23050,12 +23050,12 @@ async function GetMeetingTopics() {
             state: `open`
         });
         if (issues.data.length === 0) {
-            return `#topic No meeting topics found.`;
+            return `!topic No meeting topics found.`;
         }
         let issuesToBeDiscussed = ``;
         for (const i of issues.data) {
-            issuesToBeDiscussed += `    - [ ] \`#topic ${i.title}\`  \n`;
-            issuesToBeDiscussed += `        - \`#link ${i.html_url}\`  \n`;
+            issuesToBeDiscussed += `    - [ ] \`!topic ${i.title}\`  \n`;
+            issuesToBeDiscussed += `        - \`!link ${i.html_url}\`  \n`;
         }
         return issuesToBeDiscussed;
     }
