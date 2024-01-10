@@ -14,13 +14,13 @@ export async function GetMeetingTopics(): Promise<string> {
       state: `open`
     })
     if (issues.data.length === 0) {
-      return `#topic No meeting topics found.`
+      return `!topic No meeting topics found.`
     }
 
     let issuesToBeDiscussed = ``
     for (const i of issues.data) {
-      issuesToBeDiscussed += `    - [ ] \`#topic ${i.title}\`  \n`
-      issuesToBeDiscussed += `        - \`#link ${i.html_url}\`  \n`
+      issuesToBeDiscussed += `    - [ ] \`!topic ${i.title}\`  \n`
+      issuesToBeDiscussed += `        - \`!link ${i.html_url}\`  \n`
     }
     return issuesToBeDiscussed
   } catch (error) {
