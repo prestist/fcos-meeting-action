@@ -22828,15 +22828,18 @@ async function GetActionItems() {
         console.log(`GetActionItems started`);
         // Set constants
         const actionItemsRegEx = new RegExp(`(?<=Action Items\n------------\n)((.|\n)*)(?=Action Items,)`);
-        const meetingListRegEx = new RegExp(`(?<=>fedora_coreos_meeting.)(.*?)=?txt`, `g`);
-        const meetingNotesURL = core.getInput('rootURLMeetingLogs');
-        let lastMeetingNotesUrl = `fedora_coreos_meeting.`;
+        const meetingListRegEx = new RegExp(`(?<=>fedora-coreos-meeting.)(.*?)=?txt`, `g`);
+        const allMeetingNotes = core.getInput('rootURLMeetingLogs');
+        const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
+            .toISOString()
+            .split('T')[0];
+        const meetingNotesURL = allMeetingNotes + `/` + sevenDaysAgo + `/`;
         const listOfMeetings = await fetchData(meetingNotesURL);
         const matches = listOfMeetings.match(meetingListRegEx);
         if (matches != null) {
             const lastMeeting = matches[matches.length - 1];
             // This should be the latest meeting`s date in with the format of YYYY-MM-DD-HH.MM.txt
-            lastMeetingNotesUrl = meetingNotesURL + lastMeetingNotesUrl + lastMeeting;
+            const lastMeetingNotesUrl = meetingNotesURL + lastMeeting;
             console.debug(`last meeting notes url${lastMeetingNotesUrl}`);
             const lastMeetingNotes = await fetchData(lastMeetingNotesUrl);
             const actionItemMatches = actionItemsRegEx.exec(lastMeetingNotes);
