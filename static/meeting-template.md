@@ -120,24 +120,40 @@ At least 5 people must vote, or 51% of the WG membership, whichever is less. Vot
     - [ ] category: `Project Discussion`
     - [ ] tags: `coreos-wg`
     - [ ] In the terminal Copy and paste the following
-
         ```bash
         fcosmeetinghtml() {
-            local url=$1
-            # we'll substitute in using the non-raw url for nice highlighting of line numbers
-            local baseurl=$(dirname $url)
-            if [[ ! $url =~ raw ]]; then
-                url=$(echo "$url" | sed "s|meetbot.fedoraproject.org|meetbot-raw.fedoraproject.org|")
-            fi
-            # Take the html and delete the <head> contents (doesn't render correctly)
-            # and also substitute in the base url to make relative URLs absolute.
-            curl --silent $url                                | \
-                sed -z 's|<head>.*</head>||'                  | \
-                sed "s|href='fedora|href='${baseurl}/fedora|" | \
-                sed "s|href=\"fedora|href=\"${baseurl}/fedora|"
-        }
-        ```
+            SUMMARY_URL="$1"
+            
+            # Extract meeting date and time from the summary URL
+            MEETING_DATE_TIME=$(echo "$SUMMARY_URL" | grep -Eo '[0-9]{4}-[0-9]{2}-[0-9]{2}-[0-9]{2}\.[0-9]{2}')
 
+            # Extract meeting date from the date and time
+            MEETING_DATE=$(echo "$MEETING_DATE_TIME" | cut -d'-' -f1-3)
+
+            # Generate the log URL based on the meeting date and time
+            LOG_URL="https://meetbot-raw.fedoraproject.org/meeting-1_matrix_fedoraproject-org/$MEETING_DATE/fedora-coreos-meeting.$MEETING_DATE_TIME.log.html"
+
+            # Extract line numbers and timestamps from the log file
+            timestamps_and_lines=$(curl -s "$LOG_URL" | grep -Eo '<div class="d-table-row" id="l-[0-9]+">|<div class="d-table-cell time shrink pe-1">[0-9]{2}:[0-9]{2}:[0-9]{2}</div>')
+
+            # Generate sed commands to replace timestamps with hyperlinks including line numbers
+            sed_commands=""
+            current_line=""
+            while read -r line; do
+                if [[ "$line" =~ '<div class="d-table-row" id="l-' ]]; then
+                    current_line=$(echo "$line" | grep -Eo 'id="l-[0-9]+"')
+                elif [[ "$line" =~ '<div class="d-table-cell time shrink pe-1">' ]]; then
+                    timestamp=$(echo "$line" | grep -Eo '[0-9]{2}:[0-9]{2}:[0-9]{2}')
+                    line_number=$(echo "$current_line" | grep -Eo '[0-9]+')
+                    sed_commands+="s@.*<span class=\"details\">.*($timestamp).*<\/span>@<a href=\"$LOG_URL#l-$line_number\">&<\/a>@;"
+                fi
+            done <<< "$timestamps_and_lines"
+
+            # Apply sed commands to the summary file, delete <head> contents, and echo the result
+            curl -s "$SUMMARY_URL" | sed -E -e "$sed_commands" | sed '/<head>/,/<\/head>/d' | sed 's/TOPIC://g'
+        }
+
+        ```
     - [ ] In the terminal run `fcosmeetinghtml <this-meetings-notes>.html`
     - [ ] Copy and paste the output into the post body
     
