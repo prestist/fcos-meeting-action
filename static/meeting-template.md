@@ -129,12 +129,15 @@ At least 5 people must vote, or 51% of the WG membership, whichever is less. Vot
 
             # Extract meeting date from the date and time
             MEETING_DATE=$(echo "$MEETING_DATE_TIME" | cut -d'-' -f1-3)
+            
+            # Hydrate the raw summary URL based on the meeting date and time
+            RAW_SUMMARY_URL="https://meetbot-raw.fedoraproject.org/meeting-1_matrix_fedoraproject-org/$MEETING_DATE/fedora-coreos-meeting.$MEETING_DATE_TIME.html"
 
             # Generate the log URL based on the meeting date and time
-            LOG_URL="https://meetbot-raw.fedoraproject.org/meeting-1_matrix_fedoraproject-org/$MEETING_DATE/fedora-coreos-meeting.$MEETING_DATE_TIME.log.html"
+            RAW_LOG_URL="https://meetbot-raw.fedoraproject.org/meeting-1_matrix_fedoraproject-org/$MEETING_DATE/fedora-coreos-meeting.$MEETING_DATE_TIME.log.html"
 
             # Extract line numbers and timestamps from the log file
-            timestamps_and_lines=$(curl -s "$LOG_URL" | grep -Eo '<div class="d-table-row" id="l-[0-9]+">|<div class="d-table-cell time shrink pe-1">[0-9]{2}:[0-9]{2}:[0-9]{2}</div>')
+            timestamps_and_lines=$(curl -s "$RAW_LOG_URL" | grep -Eo '<div class="d-table-row" id="l-[0-9]+">|<div class="d-table-cell time shrink pe-1">[0-9]{2}:[0-9]{2}:[0-9]{2}</div>')
 
             # Generate sed commands to replace timestamps with hyperlinks including line numbers
             sed_commands=""
@@ -145,12 +148,12 @@ At least 5 people must vote, or 51% of the WG membership, whichever is less. Vot
                 elif [[ "$line" =~ '<div class="d-table-cell time shrink pe-1">' ]]; then
                     timestamp=$(echo "$line" | grep -Eo '[0-9]{2}:[0-9]{2}:[0-9]{2}')
                     line_number=$(echo "$current_line" | grep -Eo '[0-9]+')
-                    sed_commands+="s@.*<span class=\"details\">.*($timestamp).*<\/span>@<a href=\"$LOG_URL#l-$line_number\">&<\/a>@;"
+                    sed_commands+="s@.*<span class=\"details\">.*($timestamp).*<\/span>@<a href=\"$RAW_LOG_URL#l-$line_number\">&<\/a>@;"
                 fi
             done <<< "$timestamps_and_lines"
 
             # Apply sed commands to the summary file, delete <head> contents, and echo the result
-            curl -s "$SUMMARY_URL" | sed -E -e "$sed_commands" | sed '/<head>/,/<\/head>/d' | sed 's/TOPIC://g'
+            curl -s "$RAW_SUMMARY_URL" | sed -E -e "$sed_commands" | sed '/<head>/,/<\/head>/d' | sed 's/TOPIC://g'
         }
 
         ```
