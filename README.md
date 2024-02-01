@@ -29,6 +29,10 @@ Working days: non-holiday weekdays. Relevant holidays are the national holidays 
 - Compile them using `npm run bundle` which produces `.js` files
 - Commit the `.ts` and `.js` files
 
+## Hosts
+
+The running list is [here](https://hackmd.io/@4rqq1dsYSVuBswOHTKSIBA/ByDq2EK5p). If you would like to host, add your self to the rotation with a new date! 
+
 ### Note
 
 The action uses the `.js` files to run the action, and are found in the `dist` directory. The `.ts` files are used for development purposes only.
