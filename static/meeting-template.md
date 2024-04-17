@@ -62,7 +62,7 @@ At least 5 people must vote, or 51% of the WG membership, whichever is less. Vot
     - [ ] Copy the following notification and post it
 
         ```text
-        ﻿@aaradhak:matrix.org @apiaseck:matrix.org @davdunc:fedora.im @dustymabe:matrix.org @gurssing:matrix.org @jaimelm:fedora.im @jbrooks:matrix.org @jdoss:fedora.im @jlebon:fedora.im @jmarrero:matrix.org @lorbus:matrix.org @miabbott:fedora.im @quentin9696:matrix.org @ravanelli:fedora.im @walters:fedora.im
+        @aaradhak:matrix.org @apiaseck:matrix.org @davdunc:fedora.im @dustymabe:matrix.org @guidon:guidon.ems.host @gurssing:matrix.org @jaimelm:fedora.im @jbrooks:matrix.org @jdoss:fedora.im @jlebon:fedora.im @jmarrero:matrix.org @lorbus:matrix.org @marmijo:fedora.im @miabbott:fedora.im @quentin9696:matrix.org @ravanelli:fedora.im @walters:fedora.im @ydesouza:fedora.im
         FCOS community meeting in #fedora-meeting-1
         If you don't want to be pinged remove your name from this file: https://github.com/coreos/fedora-coreos-tracker/blob/main/issue_template/meeting-template.md
         ```
